@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 const collegeInfoSchema = mongoose.Schema({
     college_name: String,
+    college_uuid:String,
+    sno:Number,
+    approvedStatus:Number,
     college_full_name: String,
     header_photo_link: String,
     college_logo_link: String,
