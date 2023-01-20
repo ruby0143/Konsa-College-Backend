@@ -15,7 +15,7 @@ app.get("/college/:college",(req,res)=>{
   const college = req.params.college;
   console.log(college);
   // College.find({college_name : college},(err,docs)=>{
-  College.find({college_name : {'$regex' : `^${college}$`, '$options' : 'i'}},(err,docs)=>{
+  College.find({college_uuid : {'$regex' : `^${college}$`, '$options' : 'i'}},(err,docs)=>{
 
     if(!err){
       console.log(docs);
