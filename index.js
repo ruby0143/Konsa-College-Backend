@@ -36,8 +36,6 @@ app.get("/college/:college",async(req,res)=>{
     console.log(err);
     res.status(500).json({error:true, message:"Internal Server Error"})
   }
-
-    res.status(200).send(result)
 })
 
 app.get("/",async (req,res)=>{
