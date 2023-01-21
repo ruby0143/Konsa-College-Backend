@@ -11,26 +11,24 @@ app.use(cors());
 
 connectDB();
 
-app.get("/college/:college",(req,res)=>{
-  const college = req.params.college;
-  console.log(college);
-  // College.find({college_name : college},(err,docs)=>{
-  College.find({college_name : {'$regex' : `^${college}$`, '$options' : 'i'}},(err,docs)=>{
+app.get("/college/:college",async(req,res)=>{
+  try{
+    let result = await College.find({
+      "$or":[
+        {
+          college_name:{$regex:req.params.college, $options:"i"},
+          college_uuid:{$regex:req.params.college, $options:"i"}
+        }
+      ]
+    })
 
-    if(!err){
-      console.log(docs);
-      if(docs.length==0){
-        res.send("404");
-      }
-      else{
+    res.status(200).send(result)
+  } catch(err){
+    console.log(err);
+    res.status(500).json({error:true, message:"Internal Server Error"})
+  }
 
-        res.send(docs);
-      }
-    }
-    else{
-      res.status(404);
-    }
-  })
+    res.status(200).send(result)
 })
 app.get("/",async (req,res)=>{
   res.send("OK");
