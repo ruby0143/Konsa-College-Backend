@@ -11,6 +11,15 @@ app.use(cors());
 
 connectDB();
 
+app.get("/allcolleges" , async(req,res)=>{
+  try{
+    let result = await College.find({})
+    res.status(200).send(result)
+  } catch(err){
+    res.status(500).json({error:true, message:"Internal Server Error"})
+  }
+})
+
 app.get("/college/:college",async(req,res)=>{
   try{
     let result = await College.find({
