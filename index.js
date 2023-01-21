@@ -39,6 +39,7 @@ app.get("/college/:college",async(req,res)=>{
 
     res.status(200).send(result)
 })
+
 app.get("/",async (req,res)=>{
   res.send("OK");
   
