@@ -22,15 +22,12 @@ app.get("/allcolleges" , async(req,res)=>{
 
 app.get("/college/:college",async(req,res)=>{
   try{
-    let result = await College.find({
+    let result = await College.findOne({
       "$or":[
-        {
-          college_name:{$regex:req.params.college, $options:"i"},
-          college_uuid:{$regex:req.params.college, $options:"i"}
-        }
+        {college_name:{$regex: new RegExp(req.params.college), $options:"i"}},
+        {college_uuid:{$regex:req.params.college, $options:"i"}}
       ]
     })
-
     res.status(200).send(result)
   } catch(err){
     console.log(err);
